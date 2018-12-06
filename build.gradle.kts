@@ -5,13 +5,12 @@ plugins {
     kotlin("jvm") version "1.3.10"
 }
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
 
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath("com.android.tools.build:gradle:3.2.1")
@@ -26,15 +25,14 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
 }
 
 dependencies {
     compile(kotlin("stdlib-jdk8"))
 }
-repositories {
-    mavenCentral()
-}
+
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
     jvmTarget = "1.8"

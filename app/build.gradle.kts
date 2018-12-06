@@ -36,6 +36,11 @@ dependencies {
     implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
     implementation(Configs.Libs.appcompat)
     implementation(Configs.Libs.constraintLayout)
+    implementation(Configs.Libs.courotinesCore)
+    implementation(Configs.Libs.courotinesAndroid)
+    implementation(Configs.Libs.lifeCycleExtension)
+    kapt(Configs.Libs.lifeCycleCompiler)
+
     testImplementation(Configs.TestLibs.junit)
     androidTestImplementation(Configs.TestLibs.testRunner)
     androidTestImplementation(Configs.TestLibs.espresso)

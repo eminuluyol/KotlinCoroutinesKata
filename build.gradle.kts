@@ -1,4 +1,9 @@
 import org.jetbrains.kotlin.contracts.model.structure.UNKNOWN_COMPUTATION.type
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+plugins {
+    kotlin("jvm") version "1.3.10"
+}
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
@@ -24,7 +29,17 @@ allprojects {
     }
 }
 
-task<Delete>("clean") {
-    delete(rootProject.buildDir)
+dependencies {
+    compile(kotlin("stdlib-jdk8"))
 }
-
+repositories {
+    mavenCentral()
+}
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.kotlinOptions {
+    jvmTarget = "1.8"
+}
+val compileTestKotlin: KotlinCompile by tasks
+compileTestKotlin.kotlinOptions {
+    jvmTarget = "1.8"
+}

@@ -14,14 +14,14 @@ plugins {
 }
 
 android {
-    compileSdkVersion(28)
+    compileSdkVersion(Configs.Android.compileSdkVersion)
     defaultConfig {
-        applicationId = "com.taurus.kotlincoroutineskata"
-        minSdkVersion(21)
-        targetSdkVersion(28)
-        versionCode = 1
-        versionName = "1.0"
-        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+        applicationId = Configs.Android.applicationId
+        minSdkVersion(Configs.Android.minSdkVersion)
+        targetSdkVersion(Configs.Android.targetSdkVersion)
+        versionCode = Configs.Android.versionCode
+        versionName = Configs.Android.versionName
+        testInstrumentationRunner = Configs.Android.testInstrumentationRunner
     }
     buildTypes {
         getByName("release") {
@@ -34,9 +34,9 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
-    implementation("com.android.support:appcompat-v7:28.1.1")
-    implementation("com.android.support.constraint:constraint-layout:1.1.3")
-    testImplementation("junit:junit:4.12")
-    androidTestImplementation("com.android.support.test:runner:1.0.2")
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.2")
+    implementation(Configs.Libs.appcompat)
+    implementation(Configs.Libs.constraintLayout)
+    testImplementation(Configs.TestLibs.junit)
+    androidTestImplementation(Configs.TestLibs.testRunner)
+    androidTestImplementation(Configs.TestLibs.espresso)
 }

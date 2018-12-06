@@ -1,3 +1,10 @@
+import Configs.Android.applicationId
+import Configs.Android.compileSdkVersion
+import Configs.Android.minSdkVersion
+import Configs.Android.targetSdkVersion
+import Configs.Android.testInstrumentationRunner
+import Configs.Android.versionCode
+import Configs.Android.versionName
 import com.android.build.gradle.ProguardFiles.getDefaultProguardFile
 import org.gradle.internal.impldep.bsh.commands.dir
 
@@ -38,6 +45,7 @@ dependencies {
     implementation(Configs.Libs.constraintLayout)
     implementation(Configs.Libs.courotinesCore)
     implementation(Configs.Libs.courotinesAndroid)
+    implementation(Configs.Libs.andoroidKTX)
     implementation(Configs.Libs.lifeCycleExtension)
     kapt(Configs.Libs.lifeCycleCompiler)
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.ListFragment
+import com.taurus.kotlincoroutineskata.examples.*
 
 class SampleListFragment : ListFragment() {
 
@@ -34,19 +35,19 @@ class SampleListFragment : ListFragment() {
                 SAMPLE_LIFECYCLE,
                 SAMPLE_SCOPED_FRAGMENT
         )
-        listAdapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, list)
+        listAdapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, list)
         listView.setOnItemClickListener { _, _, position, _ ->
-//            when (list[position]) {
-//                SAMPLE_LAUNCH -> showFragment(LaunchFragment(), LaunchFragment.TAG)
-//                SAMPLE_SEQUENTIALLY -> showFragment(LaunchSequentiallyFragment(), LaunchSequentiallyFragment.TAG)
-//                SAMPLE_PARALLEL -> showFragment(LaunchParallelFragment(), LaunchParallelFragment.TAG)
-//                SAMPLE_TIMEOUT -> showFragment(LaunchTimeoutFragment(), LaunchTimeoutFragment.TAG)
-//                SAMPLE_CANCEL -> showFragment(CancelFragment(), CancelFragment.TAG)
-//                SAMPLE_EXCEPTION -> showFragment(ExceptionFragment(), ExceptionFragment.TAG)
-//                SAMPLE_EXCEPTION_HANDLER -> showFragment(ExceptionHandlerFragment(), ExceptionHandlerFragment.TAG)
-//                SAMPLE_LIFECYCLE -> showFragment(LifecycleAwareFragment(), LifecycleAwareFragment.TAG)
-//                SAMPLE_SCOPED_FRAGMENT -> showFragment(AndroidScopedFragment(), AndroidScopedFragment.TAG)
-//            }
+            when (list[position]) {
+                SAMPLE_LAUNCH -> showFragment(LaunchFragment(), LaunchFragment.TAG)
+                SAMPLE_SEQUENTIALLY -> showFragment(LaunchSequentiallyFragment(), LaunchSequentiallyFragment.TAG)
+                SAMPLE_PARALLEL -> showFragment(LaunchParallelFragment(), LaunchParallelFragment.TAG)
+                SAMPLE_TIMEOUT -> showFragment(LaunchTimeoutFragment(), LaunchTimeoutFragment.TAG)
+                SAMPLE_CANCEL -> showFragment(CancelFragment(), CancelFragment.TAG)
+                SAMPLE_EXCEPTION -> showFragment(ExceptionFragment(), ExceptionFragment.TAG)
+                SAMPLE_EXCEPTION_HANDLER -> showFragment(ExceptionHandlerFragment(), ExceptionHandlerFragment.TAG)
+                SAMPLE_LIFECYCLE -> showFragment(LifecycleAwareFragment(), LifecycleAwareFragment.TAG)
+                SAMPLE_SCOPED_FRAGMENT -> showFragment(AndroidScopedFragment(), AndroidScopedFragment.TAG)
+            }
         }
     }
 

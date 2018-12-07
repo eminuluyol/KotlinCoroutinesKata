@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.taurus.kotlincoroutineskata.R
+import com.taurus.kotlincoroutineskata.hide
+import com.taurus.kotlincoroutineskata.visible
 import kotlinx.android.synthetic.main.fragment_button.*
 import kotlinx.coroutines.*
 import java.util.*
@@ -37,13 +39,10 @@ class AndroidScopedFragment : ScopedFragment() {
         hideLoading() // ui thread
     }
 
-    private fun showLoading() {
-        progressBar.visibility = View.VISIBLE
-    }
+    private fun showLoading() = progressBar.visible()
 
-    private fun hideLoading() {
-        progressBar.visibility = View.GONE
-    }
+    private fun hideLoading() = progressBar.hide()
+
 
     private fun showText(data: String) {
         textView.text = data

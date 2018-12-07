@@ -13,11 +13,7 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager
                     .beginTransaction()
-                    .add(
-                            fragmentContainer,
-                            SampleListFragment(),
-                            SampleListFragment.TAG
-                    )
+                    .add(fragmentContainer, SampleListFragment(), SampleListFragment.TAG)
                     .commitNow()
         }
     }

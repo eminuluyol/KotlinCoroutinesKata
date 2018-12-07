@@ -52,9 +52,9 @@ class SampleListFragment : ListFragment() {
     }
 
     private fun showFragment(fragment: Fragment, tag: String) {
-        requireActivity().supportFragmentManager.beginTransaction()
-                .add(R.id.fragmentContainer, fragment, tag)
-                .addToBackStack(tag)
-                .commit()
+        requireActivity().fragmentTransaction {
+            add(R.id.fragmentContainer, fragment, tag)
+            addToBackStack(tag)
+        }
     }
 }

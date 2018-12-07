@@ -23,10 +23,7 @@ class LaunchParallelFragment : Fragment() {
         const val TAG = "LaunchParallelFragment"
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        job = Job()
-    }
+    // Create the job
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_button, container, false)
@@ -35,24 +32,20 @@ class LaunchParallelFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        button.setOnClickListener { loadData() }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        job.cancel()
+        button.setOnClickListener {
+            // loadData()
+        }
     }
 
     private fun loadData() = GlobalScope.launch(uiDispatcher + job) {
-        showLoading()
-
-        val result1 = async { dataProvider.loadData() }
-        val result2 = async { dataProvider.loadData() }
-
-        val data = "${result1.await()}\n${result2.await()}"
-        showText(data)
-        hideLoading()
+        // show loading
+        // get the first result from data provider
+        // get the second result from data provider
+        // show Text(Both of them one under the other)
+        // hide loading
     }
+
+    // Cancel the job
 
     private fun showLoading() = progressBar.visible()
 

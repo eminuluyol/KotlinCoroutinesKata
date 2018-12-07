@@ -23,10 +23,7 @@ class LaunchFragment : Fragment() {
         const val TAG = "LaunchFragment"
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        job = Job()
-    }
+    // Create the job
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_button, container, false)
@@ -35,22 +32,19 @@ class LaunchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        button.setOnClickListener { loadData() }
+        button.setOnClickListener {
+            // loadData()
+        }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        job.cancel()
+    private fun loadData() {
+        // show loading
+        // get the result from data provider
+        // show Text
+        // hide loading
     }
 
-    private fun loadData() = GlobalScope.launch(uiDispatcher + job) {
-        showLoading() // ui thread
-
-        val result = dataProvider.loadData() // non ui thread, suspend until finished
-
-        showText(result) // ui thread
-        hideLoading() // ui thread
-    }
+    // Cancel the job
 
     private fun showLoading() = progressBar.visible()
 

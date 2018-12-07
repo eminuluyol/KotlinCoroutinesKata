@@ -35,7 +35,9 @@ class ExceptionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        button.setOnClickListener { loadData() }
+        button.setOnClickListener {
+            // loadData()
+        }
     }
 
     override fun onDestroyView() {
@@ -43,17 +45,12 @@ class ExceptionFragment : Fragment() {
         job.cancel()
     }
 
-    private fun loadData() = GlobalScope.launch(uiDispatcher + job) {
-        showLoading()
-
-        try {
-            val result = dataProvider.loadData()
-            showText(result)
-        } catch (e: IllegalArgumentException) {
-            showText(e.message ?: "")
-        }
-
-        hideLoading()
+    private fun loadData() {
+        // show loading
+        // do try/catch exception handling
+        // if there is no exception show the result
+        // if there is an exception show the error message
+        // hide loading
     }
 
     private fun showLoading() = progressBar.visible()

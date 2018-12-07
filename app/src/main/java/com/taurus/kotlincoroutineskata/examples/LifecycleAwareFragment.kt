@@ -19,18 +19,13 @@ import kotlin.coroutines.CoroutineContext
 
 class MainScope : CoroutineScope, LifecycleObserver {
 
-    private lateinit var job: Job
+    // create a job
+    // create a coroutineContext
+    // cancel the job
 
     override val coroutineContext: CoroutineContext
-        get() = job + Dispatchers.Main
+        get() =  Dispatchers.Main // not enough
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    fun onCreate() {
-        job = Job()
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    fun destroy() = job.cancel()
 }
 
 class LifecycleAwareFragment : Fragment() {
@@ -54,7 +49,9 @@ class LifecycleAwareFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        button.setOnClickListener { loadData() }
+        button.setOnClickListener {
+           // loadData()
+        }
     }
 
     private fun loadData() = mainScope.launch {

@@ -36,7 +36,9 @@ class ExceptionHandlerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        button.setOnClickListener { loadData() }
+        button.setOnClickListener {
+           // loadData()
+        }
     }
 
     override fun onDestroyView() {
@@ -44,20 +46,18 @@ class ExceptionHandlerFragment : Fragment() {
         job.cancel()
     }
 
-    private val exceptionHandler: CoroutineContext = CoroutineExceptionHandler { _, throwable ->
-        showText(throwable.message ?: "")
-        hideLoading()
-        job = Job() // exception handler cancels job
-    }
+    // write a CoroutineExceptionHandler
+    // show error message
+    // hideLoading
+    // create a new job
+
 
     // we can attach CoroutineExceptionHandler to parent context
-    private fun loadData() = GlobalScope.launch(uiDispatcher + exceptionHandler + job) {
-        showLoading()
-
-        val result = dataProvider.loadData()
-        showText(result)
-
-        hideLoading()
+    private fun loadData() {
+        // show loading
+        // get result
+        // show result
+        // hide loading
     }
 
     private fun showLoading() = progressBar.visible()

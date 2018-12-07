@@ -24,10 +24,7 @@ class CancelFragment : Fragment() {
         const val TAG = "LaunchFragment"
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        job = Job()
-    }
+    // Create the job
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_cancel, container, false)
@@ -38,26 +35,16 @@ class CancelFragment : Fragment() {
 
         button.setOnClickListener {
             // if you want to know how coroutine was completed, attach invokeOnCompletion
-            loadData().invokeOnCompletion {
-                if (it is CancellationException) { // if coroutine was cancelled
-                    textView.text = "Cancelled"
-                    hideLoading()
-                }
-            }
+            // Check if coroutine was cancelled
         }
         buttonCancel.setOnClickListener {
             // cancelling parent job will cancel all attached child coroutines
-            job.cancel()
             // we need to create new Job, because current is cancelled
             // new coroutine will not start, if parent Job is already cancelled
-            job = Job()
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        job.cancel()
-    }
+    // Cancel the job
 
     private fun loadData() = GlobalScope.launch(uiDispatcher + job) {
         showLoading()

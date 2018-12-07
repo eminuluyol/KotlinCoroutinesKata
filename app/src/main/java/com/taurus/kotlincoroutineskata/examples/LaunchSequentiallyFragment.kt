@@ -23,10 +23,7 @@ class LaunchSequentiallyFragment : Fragment() {
         const val TAG = "LaunchSequentiallyFragment"
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        job = Job()
-    }
+    // Create the job
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_button, container, false)
@@ -35,23 +32,20 @@ class LaunchSequentiallyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        button.setOnClickListener { loadData() }
+        button.setOnClickListener {
+            // loadData()
+        }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        job.cancel()
+    private fun loadData()  {
+        // show loading
+        // get the first result from data provider
+        // get the second result from data provider
+        // show Text(Both of them one under the other)
+        // hide loading
     }
 
-    private fun loadData() = GlobalScope.launch(uiDispatcher + job) {
-        showLoading()
-
-        val result1 = dataProvider.loadData()
-        val result2 = dataProvider.loadData()
-
-        showText("$result1\n$result2")
-        hideLoading()
-    }
+    // Cancel the job
 
     private fun showLoading() = progressBar.visible()
 

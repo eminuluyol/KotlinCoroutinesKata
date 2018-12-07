@@ -23,10 +23,7 @@ class LaunchTimeoutFragment : Fragment() {
         const val TAG = "LaunchTimeoutFragment"
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        job = Job()
-    }
+    // Create the job
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_button, container, false)
@@ -35,22 +32,19 @@ class LaunchTimeoutFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        button.setOnClickListener { loadData() }
+        button.setOnClickListener {
+            // loadData()
+        }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        job.cancel()
+    private fun loadData() {
+        // show loading
+        // get the result from data provider if it takes more than predefined timeout then show Timeout text on the screen
+        // show Text(result or Timeout)
+        // hide loading
     }
 
-    private fun loadData() = GlobalScope.launch(uiDispatcher + job) {
-        showLoading()
-
-        val result = withTimeoutOrNull(TimeUnit.SECONDS.toMillis(1)) { dataProvider.loadData() }
-
-        showText(result ?: "Timeout")
-        hideLoading()
-    }
+    // Cancel the job
 
     private fun showLoading() = progressBar.visible()
 

@@ -17,15 +17,11 @@ class ExceptionFragment : Fragment() {
 
     private val uiDispatcher: CoroutineDispatcher = Dispatchers.Main
     private val dataProvider = DataProvider()
-    private lateinit var job: Job
+    private val job = SupervisorJob()
+    private val scope = CoroutineScope(uiDispatcher + job)
 
     companion object {
         const val TAG = "ExceptionFragment"
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        job = Job()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -34,16 +30,10 @@ class ExceptionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         button.setOnClickListener { loadData() }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        job.cancel()
-    }
-
-    private fun loadData() = GlobalScope.launch(uiDispatcher + job) {
+    private fun loadData() = scope.launch {
         showLoading()
 
         try {
@@ -51,9 +41,10 @@ class ExceptionFragment : Fragment() {
             showText(result)
         } catch (e: IllegalArgumentException) {
             showText(e.message ?: "")
+        } finally {
+            hideLoading()
         }
 
-        hideLoading()
     }
 
     private fun showLoading() = progressBar.visible()
@@ -64,6 +55,11 @@ class ExceptionFragment : Fragment() {
 
     private fun showText(data: String) {
         textView.text = data
+    }
+
+    override fun onDestroyView() {
+        scope.coroutineContext.cancelChildren()
+        super.onDestroyView()
     }
 
     class DataProvider(private val dispatcher: CoroutineDispatcher = Dispatchers.IO) {

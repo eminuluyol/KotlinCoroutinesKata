@@ -17,15 +17,11 @@ class LaunchTimeoutFragment : Fragment() {
 
     private val uiDispatcher: CoroutineDispatcher = Dispatchers.Main
     private val dataProvider = DataProvider()
-    private lateinit var job: Job
+    private val job = SupervisorJob()
+    private val scope = CoroutineScope(uiDispatcher + job)
 
     companion object {
         const val TAG = "LaunchTimeoutFragment"
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        job = Job()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -38,12 +34,7 @@ class LaunchTimeoutFragment : Fragment() {
         button.setOnClickListener { loadData() }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        job.cancel()
-    }
-
-    private fun loadData() = GlobalScope.launch(uiDispatcher + job) {
+    private fun loadData() = scope.launch {
         showLoading()
 
         val result = withTimeoutOrNull(TimeUnit.SECONDS.toMillis(1)) { dataProvider.loadData() }
@@ -58,6 +49,11 @@ class LaunchTimeoutFragment : Fragment() {
 
     private fun showText(data: String) {
         textView.text = data
+    }
+
+    override fun onDestroyView() {
+        scope.coroutineContext.cancelChildren()
+        super.onDestroyView()
     }
 
     class DataProvider(private val dispatcher: CoroutineDispatcher = Dispatchers.IO) {

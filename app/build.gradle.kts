@@ -6,6 +6,7 @@ import Configs.Android.testInstrumentationRunner
 import Configs.Android.versionCode
 import Configs.Android.versionName
 import com.android.build.gradle.ProguardFiles.getDefaultProguardFile
+import org.gradle.api.JavaVersion.VERSION_1_8
 import org.gradle.internal.impldep.bsh.commands.dir
 
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
@@ -36,6 +37,7 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
     }
+
 }
 
 dependencies {
